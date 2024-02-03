@@ -1,18 +1,13 @@
 package com.project.parkingLot.repositories;
 
 import com.project.parkingLot.models.ParkingLot;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParkingLotRepository {
-    private static List<ParkingLot> parkingLots = new ArrayList<>();
-    private static long nextId = 0L;
+@Repository
+public interface ParkingLotRepository extends JpaRepository<ParkingLot, Long> {
 
-    public static ParkingLot save(ParkingLot parkingLot) {
-        parkingLot.setId(nextId);
-        nextId += 1;
-        parkingLots.add(parkingLot);
-        return parkingLot;
-    }
 }
