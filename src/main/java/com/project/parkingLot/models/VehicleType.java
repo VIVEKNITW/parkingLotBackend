@@ -1,8 +1,8 @@
 package com.project.parkingLot.models;
 
 public enum VehicleType {
-    SMALL,
-    MEDIUM,
-    LARGE,
-    ELECTRIC,
+    TWO_W,
+    FOUR_W,
+    TWO_WE,
+    FOUR_WE,
 }
