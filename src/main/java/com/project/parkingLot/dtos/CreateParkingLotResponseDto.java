@@ -1,15 +1,11 @@
 package com.project.parkingLot.dtos;
 
 import com.project.parkingLot.models.ParkingLot;
+import lombok.Data;
 
+@Data
 public class CreateParkingLotResponseDto {
-    private ParkingLot parkingLot;
-
-    public ParkingLot getParkingLot() {
-        return parkingLot;
-    }
-
-    public void setParkingLot(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
-    }
+    private Long id;
+    private String message;
+    private String status;
 }

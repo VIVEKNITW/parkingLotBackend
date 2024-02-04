@@ -1,6 +1,7 @@
 package com.project.parkingLot.services;
 
 
+import com.project.parkingLot.exceptions.NoOperatorFoundException;
 import com.project.parkingLot.models.*;
 import com.project.parkingLot.repositories.OperatorRepository;
 import com.project.parkingLot.repositories.ParkingLotRepository;
@@ -22,7 +23,7 @@ public class ParkingLotService {
         this.operatorRepository = operatorRepository;
     }
 
-    public ParkingLot createParkingLot(String address, List<Integer> floors, List<List<List<Integer>>> allocation, List<List<Integer>> gates) {
+    public ParkingLot createParkingLot(String address, List<Integer> floors, List<List<List<Integer>>> allocation, List<List<Integer>> gates) throws NoOperatorFoundException {
 
         List<ParkingFloor> parkingFloors = new ArrayList<>();
         List<Gate> parkingLotGates = new ArrayList<>();
@@ -80,10 +81,10 @@ public class ParkingLotService {
 
             Optional<Operator> optionalOperator = operatorRepository.findById((long)operatorId);
             Operator operator = null;
-            if(optionalOperator.isPresent()){
-                operator = optionalOperator.get();
+            if(optionalOperator.isEmpty()){
+                throw new NoOperatorFoundException("operator with id= "+operatorId+" not found");
             }
-
+            operator = optionalOperator.get();
             GateStatus gateStatusEnum = null;
             if(gateStatus == 1){
                 gateStatusEnum = GateStatus.OPEN;

@@ -3,6 +3,7 @@ package com.project.parkingLot.controllers;
 import com.project.parkingLot.dtos.CreateParkingLotRequestDto;
 import com.project.parkingLot.dtos.CreateParkingLotResponseDto;
 import com.project.parkingLot.dtos.ResponseDto;
+import com.project.parkingLot.exceptions.NoOperatorFoundException;
 import com.project.parkingLot.models.ParkingLot;
 import com.project.parkingLot.services.ParkingLotService;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -37,11 +38,19 @@ public class ParkingLotController {
         List<List<List<Integer>>> allocation = request.getAllocation();
         List<List<Integer>> gates = request.getGates();
 
-        ParkingLot parkingLot = parkingLotService.createParkingLot(address, floors, allocation, gates);
-
-
         CreateParkingLotResponseDto response = new CreateParkingLotResponseDto();
+        try{
+            ParkingLot parkingLot = parkingLotService.createParkingLot(address, floors, allocation, gates);
+            response.setMessage("added new parking lot to database");
+            response.setStatus("SUCCESS");
+            response.setId(parkingLot.getId());
+        }catch (NoOperatorFoundException e){
+            response.setStatus("FAILURE");
+            response.setMessage(e.getMessage());
+        }
+
         return response;
+
     }
 
     @DeleteMapping("/deleteParkingLot/{parkingLotId}")
