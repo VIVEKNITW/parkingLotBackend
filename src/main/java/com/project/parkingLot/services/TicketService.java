@@ -58,11 +58,10 @@ public class TicketService {
         Vehicle vehicle = new Vehicle(vehicleNo, vehicleTypeEnum);
 
         Operator operator = gateRepository.findOperatorIdByGateNumber(gateNumber);
-        Optional<Operator> optionalOperator= operatorRepository.findById(operator.getId());
 
         Optional<ParkingLot> optionalParkingLot = parkingLotRepository.findById(parkingLotId);
         ParkingLot parkingLot = null;
-        if(optionalOperator.isPresent()){
+        if(optionalParkingLot.isPresent()){
             parkingLot = optionalParkingLot.get();
         }
 
