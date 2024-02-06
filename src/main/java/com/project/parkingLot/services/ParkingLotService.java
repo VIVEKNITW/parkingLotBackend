@@ -113,6 +113,12 @@ public class ParkingLotService {
         }
         parkingLotRepository.delete(parkingLot);
     }
+
+
+    public List<ParkingLot> getParkingLots(){
+        List<ParkingLot> parkingLots = parkingLotRepository.findAll();
+        return parkingLots;
+    }
 }
 
 

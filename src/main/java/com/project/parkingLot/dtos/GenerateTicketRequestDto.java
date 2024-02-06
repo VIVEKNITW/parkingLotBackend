@@ -7,7 +7,7 @@ public class GenerateTicketRequestDto {
     private String vehicleNo;
     private String vehicleType;
     private String ownerName;
-    private int gateId;
+    private int gateNumber;
     long parkingLotId;
 
 }

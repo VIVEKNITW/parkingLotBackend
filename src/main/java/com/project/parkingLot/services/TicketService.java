@@ -86,9 +86,13 @@ public class TicketService {
 
         Ticket T = new Ticket(entryTime, vehicle, parkingSpot, operator, parkingLot, gate, ownerName);
         System.out.println("ticket generated");
-        ticketRepository.save(T);
+        Ticket ticket = ticketRepository.save(T);
 //        return new Ticket();
-        return T;
+        return ticket;
+    }
+
+    public void deleteTicket(long ticketId){
+        ticketRepository.deleteById(ticketId);
     }
 }
 

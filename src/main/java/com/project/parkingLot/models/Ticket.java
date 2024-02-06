@@ -24,7 +24,7 @@ public class Ticket extends BaseModel{
     private Operator generatedBy;
     @ManyToOne(cascade = CascadeType.ALL)
     private ParkingLot parkingLot;
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Gate entryGate;
     private String ownerName;
 }

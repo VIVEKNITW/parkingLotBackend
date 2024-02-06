@@ -2,17 +2,14 @@ package com.project.parkingLot.controllers;
 
 import com.project.parkingLot.dtos.CreateParkingLotRequestDto;
 import com.project.parkingLot.dtos.CreateParkingLotResponseDto;
-import com.project.parkingLot.dtos.ResponseDto;
+import com.project.parkingLot.dtos.ParkingLotsResponseDto;
 import com.project.parkingLot.exceptions.NoOperatorFoundException;
 import com.project.parkingLot.models.ParkingLot;
 import com.project.parkingLot.services.ParkingLotService;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -57,6 +54,20 @@ public class ParkingLotController {
     public void deleteParkingLot(@PathVariable Long parkingLotId){
         parkingLotService.deleteParkingLot(parkingLotId);
 
+    }
+
+    @GetMapping("/getAllParkingLot")
+    public List<ParkingLotsResponseDto> getAllParkingLots(){
+        List<ParkingLotsResponseDto> responseDto = new ArrayList<>();
+        List<ParkingLot> parkingLots = parkingLotService.getParkingLots();
+        for(ParkingLot p:parkingLots){
+            ParkingLotsResponseDto parkingLotsResponseDto = new ParkingLotsResponseDto();
+            parkingLotsResponseDto.setParkingLotId(p.getId());
+            parkingLotsResponseDto.setAddress(p.getAddress());
+            responseDto.add(parkingLotsResponseDto);
+        }
+        System.out.println("Sending response");
+        return responseDto;
     }
 
 }

@@ -20,20 +20,27 @@ public class TicketController {
         GenerateTicketResponseDto responseDto = new GenerateTicketResponseDto();
 
         Ticket T = ticketService.generateTicket(requestDto.getOwnerName(),
-                requestDto.getGateId(),
+                requestDto.getGateNumber(),
                 requestDto.getVehicleNo(),
                 requestDto.getVehicleType(),
                 requestDto.getParkingLotId());
 
-//        responseDto.setTicketId(T.getId());
-//        responseDto.setEntryTime(T.getEntryTime().toString());
-//        responseDto.setGateNo(T.getEntryGate().getNumber());
-//        responseDto.setOwnerName(T.getOwnerName());
-//        responseDto.setVehicleNumber(T.getVehicle().getNumber());
-//        responseDto.setSpotNumber(T.getParkingSpot().getSpotNumber());
-//        responseDto.setEntryOperatorName(T.getEntryGate().getOperator().getName());
-//        responseDto.setParkingLotAddress(T.getParkingLot().getAddress());
+        responseDto.setTicketId(T.getId());
+        responseDto.setEntryTime(T.getEntryTime().toString());
+        responseDto.setGateNo(T.getEntryGate().getNumber());
+        responseDto.setOwnerName(T.getOwnerName());
+        responseDto.setVehicleNumber(T.getVehicle().getNumber());
+        responseDto.setSpotNumber(T.getParkingSpot().getSpotNumber());
+        responseDto.setEntryOperatorName(T.getEntryGate().getOperator().getName());
+        responseDto.setParkingLotAddress(T.getParkingLot().getAddress());
 
         return responseDto;
+    }
+
+
+    @DeleteMapping("/deleteTicket/{ticketId}")
+    public String deleteTicket(@PathVariable Long ticketId){
+        ticketService.deleteTicket(ticketId);
+        return "Success";
     }
 }
