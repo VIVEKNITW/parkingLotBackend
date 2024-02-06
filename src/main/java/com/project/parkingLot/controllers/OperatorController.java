@@ -19,7 +19,7 @@ public class OperatorController {
     }
 
     @PostMapping("/addOperator")
-    public AddOperatorResponseDto addUser(@RequestBody AddOperatorRequestDto requestDto){
+    public AddOperatorResponseDto addOperator(@RequestBody AddOperatorRequestDto requestDto){
         Operator operator = operatorService.addOperator(requestDto.getName(), requestDto.getPhoneNo(), requestDto.getEmail());
         AddOperatorResponseDto responseDto = new AddOperatorResponseDto();
         responseDto.setOperatorId(operator.getId());
